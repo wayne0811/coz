@@ -15,12 +15,12 @@ Dependencies:
 
 Bundled libraries:
 - Python
--- jsonrpyc
--- py-ipfs-api
--- pyaes
+  - jsonrpyc
+  - py-ipfs-api
+  - pyaes
 - NodeJS
--- json-rpc-server-stream
--- nem-sdk
+  - json-rpc-server-stream
+  - nem-sdk
 
 ## Building
 Clone the repository  and run `prepare.sh` in a Linux shell.
@@ -37,10 +37,10 @@ Dependencies:
 4. `Tools -> Address book`, enter the addresses of the 2 accounts with suitable aliases.
 5. `File -> Load private key`, select the private key file of the first account. Set account label if desired.
 6. On the Send tab, click `New...`. The New transaction dialog is shown.
-  - Select the other Testnet account from the address book as recipient
-  - Provide an invoice number (any string)
-  - Provide an invoice file (any file, although CSV is assumed)
-  - Attach any additional supporting documents for the invoice
+   - Select the other Testnet account from the address book as recipient
+   - Provide an invoice number (any string)
+   - Provide an invoice file (any file, although CSV is assumed)
+   - Attach any additional supporting documents for the invoice
 
    The supplied data is uploaded to the IPFS gateway under a single directory.
    The directory hash is sent to the recipient in the encrypted message field of a 0-amount transfer transaction.
