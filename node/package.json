@@ -1,0 +1,16 @@
+{
+  "name": "coz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "coz.js",
+  "dependencies": {
+    "json-rpc-server-stream": "^0.0.1",
+    "nem-sdk": "^1.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wayne Tan",
+  "license": "ISC"
+}

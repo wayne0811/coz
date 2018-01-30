@@ -1,0 +1,9 @@
+[submodule "jsonrpyc"]
+	path = jsonrpyc
+	url = https://github.com/riga/jsonrpyc.git
+[submodule "py-ipfs-api"]
+	path = py-ipfs-api
+	url = https://github.com/ipfs/py-ipfs-api.git
+[submodule "pyaes-git"]
+	path = pyaes-git
+	url = https://github.com/ricmoo/pyaes.git
