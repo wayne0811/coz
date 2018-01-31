@@ -4,7 +4,7 @@ A triple-entry accounting proof of concept that uses the NEM blockchain for time
 Built by Team CoZ, entrants to the [Global NEM Hackathon](https://hackathon.nem.io/) 2017-2018.
 
 ## Installation
-Download the ZIP file from Releases page, extract it and execute `__main__.py`.
+Download the ZIP file from [Releases](https://github.com/wayne0811/coz/releases) page, extract it and execute `__main__.py`.
 Alternatively, see [Building](#building).
 
 Dependencies:
