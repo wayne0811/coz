@@ -50,10 +50,6 @@ class Document():
 		self.name = name if name else self.path.name
 		self.hash = ''
 
-	#@property
-	#def name(self):
-		#return self.path.name
-
 	def upload(self, ipfs, encrypt_cls, key):
 		import io
 		enc = encrypt_cls(key)
@@ -67,7 +63,6 @@ class Document():
 	def download(self, dest, ipfs, encrypt_cls, key):
 		if not ipfs: raise ValueError
 
-		#dest = Path(dest)
 		data = ipfs.cat(self.hash)
 		data = encrypt_cls(key).decrypt(data)
 		open(dest, 'wb').write(data)
@@ -120,6 +115,7 @@ class DocumentBatch():
 			#ipfs.pin_rm(res['Hash'])
 			return new
 
+		# Add metadata
 		ipfs_root = add_link_data(ipfs_root, 'title', self.title.encode())
 		if encrypt:
 			# TODO: encrypt AES key using NEM keypair before uploading
@@ -131,6 +127,7 @@ class DocumentBatch():
 
 		logging.debug(ipfs_root['Hash'])
 
+		# Send transfer transaction
 		pubkey = acc_recv.pubkey if encrypt else None
 		tx = nem.send_transfer_transaction(acc_send.privkey, self.receiver, 0, ipfs_root['Hash'], recv_pubkey=pubkey, block=1)
 		logging.debug(tx)
@@ -146,6 +143,7 @@ class DocumentBatch():
 
 		msg = tx['transaction']['message']['payload']
 		msg = bytes.fromhex(msg)
+		# Decode transaction message
 		if tx['transaction']['message']['type'] == 2:
 			msg = nem.decrypt(acc_recv.privkey, tx['transaction']['signer'], msg)
 		msg = msg.decode()
@@ -161,6 +159,7 @@ class DocumentBatch():
 	@classmethod
 	def _get_metadata(cls, _hash, ipfs):
 
+		# Return list of links within a directory
 		def parse_ipfs(ipfs, _hash):
 			files = ipfs.ls(_hash)
 			msg = [(f['Name'], f['Hash']) for f in files['Objects'][0]['Links']]
@@ -213,6 +212,7 @@ class DocumentBatch():
 
 		destination = Path(destination)
 
+		# Generate a new folder by adding a numeric suffix
 		suffix_num = None
 		while True:
 			suffix = '_{}'.format(suffix_num) if suffix_num else ''
@@ -223,6 +223,7 @@ class DocumentBatch():
 			else:
 				break
 		subdir.mkdir()
+		# Download files
 		ipfs.get(self.ipfs_hash + '/files', filepath=str(subdir)+'/')
 
 		metadata = self.get_metadata(ipfs)
